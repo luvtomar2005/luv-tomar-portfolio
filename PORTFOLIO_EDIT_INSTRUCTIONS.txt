@@ -1,0 +1,91 @@
+PORTFOLIO EDIT INSTRUCTIONS
+===========================
+
+This file explains exactly where to edit content in your portfolio in the future.
+
+1) RESUME FILE / DOWNLOAD BUTTON
+--------------------------------
+- Put your resume PDF inside: public/
+- Current expected file name:
+  Final_updated_resume_2026.pdf
+- Download links are used in:
+  - src/components/Navbar.jsx
+  - src/components/Hero.jsx
+- If you rename the resume file later, update the href in BOTH files.
+
+2) NAVBAR ITEMS / SECTION NAMES
+-------------------------------
+- File: src/components/Navbar.jsx
+- Edit the navItems array to rename menu labels or order.
+- Section IDs must match each section's id attribute in components.
+
+3) HERO SECTION CONTENT
+-----------------------
+- File: src/components/Hero.jsx
+- Edit:
+  - Name text
+  - Tagline
+  - Intro paragraph
+  - Typewriter roles array (const roles = [...])
+  - CTA button labels
+
+4) ABOUT SECTION CONTENT
+------------------------
+- File: src/components/About.jsx
+- Replace or refine paragraph text inside the section.
+
+5) PROJECTS CONTENT
+-------------------
+- File: src/data/projects.js
+- Add/edit project data here.
+- UI rendering happens in:
+  - src/components/Projects.jsx
+- Important:
+  - Keep fields consistent (title, description, features, techStack, githubUrl)
+  - If you add new keys, also update rendering logic in Projects.jsx
+
+6) SKILLS + CONSISTENCY SECTION
+-------------------------------
+- File: src/components/Skills.jsx
+- Edit:
+  - skillGroups array for skills
+  - "Consistency & Problem Solving" metrics block values
+
+7) CONTACT LINKS
+----------------
+- File: src/components/Contact.jsx
+- Edit links array for:
+  - Email
+  - LinkedIn
+  - GitHub
+- Location text is also in this file.
+
+8) ACTIVE SECTION HIGHLIGHT LOGIC
+---------------------------------
+- File: src/hooks/useActiveSection.js
+- Edit section IDs or observer behavior if highlight feels off.
+- If you add a new section, add its id to sectionIds array.
+
+9) GLOBAL STYLING / THEME
+-------------------------
+- File: src/index.css
+- Change base background color, global font, smooth scrolling.
+
+10) APP SECTION ORDER
+---------------------
+- File: src/App.jsx
+- Controls the order of sections rendered on the page.
+
+11) QUICK CHECK AFTER ANY CHANGE
+--------------------------------
+Run:
+1. npm run dev
+2. npm run build
+
+What to verify:
+- No console or build errors
+- Smooth scroll works
+- Resume button opens correct file
+- Links open correct profiles
+- Mobile layout looks clean
+
