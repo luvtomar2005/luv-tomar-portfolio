@@ -10,6 +10,9 @@ const navItems = [
   { id: 'contact', label: 'Contact' },
 ]
 
+const linkClass =
+  'relative rounded-md px-2.5 py-2 font-sans text-[13px] font-medium tracking-wide text-muted transition-colors duration-200 hover:bg-white/[0.04] hover:text-heading'
+
 const Navbar = () => {
   const activeSection = useActiveSection()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -23,18 +26,18 @@ const Navbar = () => {
   }
 
   return (
-    <header className="fixed top-0 z-50 w-full border-b border-[rgba(255,255,255,0.06)] bg-[rgba(10,10,15,0.85)] backdrop-blur-[12px]">
-      <nav className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-5 sm:px-8">
+    <header className="fixed top-0 z-50 w-full border-b border-border bg-page/80 backdrop-blur-md backdrop-saturate-150">
+      <nav className="mx-auto flex h-[3.75rem] w-full max-w-6xl items-center justify-between px-5 sm:px-8">
         <button
           type="button"
           onClick={() => handleNavClick('home')}
-          className="font-['Space_Grotesk'] text-[20px] font-semibold tracking-wide text-[#00D4FF]"
+          className="font-display text-[15px] font-semibold tracking-tight text-heading"
           aria-label="Scroll to home section"
         >
           LT
         </button>
 
-        <div className="hidden items-center gap-7 md:flex">
+        <div className="hidden items-center gap-1 md:flex md:gap-0.5">
           {navItems.map((item) => {
             const isActive = activeSection === item.id
             return (
@@ -42,12 +45,16 @@ const Navbar = () => {
                 key={item.id}
                 type="button"
                 onClick={() => handleNavClick(item.id)}
-                className={`font-['Inter'] text-[14px] font-normal transition-colors duration-200 ${
-                  isActive ? 'text-[#00D4FF]' : 'text-[#6B7280] hover:text-[#F0F0F5]'
-                }`}
+                className={`${linkClass} ${isActive ? 'text-heading' : ''}`}
                 aria-current={isActive ? 'page' : undefined}
               >
                 {item.label}
+                <span
+                  className={`absolute bottom-1 left-1 right-1 h-[2px] rounded-full bg-accent transition-opacity duration-200 ${
+                    isActive ? 'opacity-100' : 'opacity-0'
+                  }`}
+                  aria-hidden
+                />
               </button>
             )
           })}
@@ -56,7 +63,7 @@ const Navbar = () => {
         <button
           type="button"
           onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-          className="inline-flex items-center justify-center text-[#F0F0F5] md:hidden"
+          className="-mr-2 inline-flex size-11 items-center justify-center rounded-lg text-heading transition-colors hover:bg-white/[0.04] md:hidden"
           aria-label={isMobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
           aria-expanded={isMobileMenuOpen}
         >
@@ -70,10 +77,10 @@ const Navbar = () => {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.24, ease: 'easeOut' }}
-            className="overflow-hidden border-t border-[rgba(255,255,255,0.06)] bg-[rgba(10,10,15,0.92)] md:hidden"
+            transition={{ duration: 0.22, ease: [0.25, 0.1, 0.25, 1] }}
+            className="overflow-hidden border-t border-border bg-page/95 md:hidden"
           >
-            <div className="mx-auto flex max-w-6xl flex-col px-5 py-3">
+            <div className="mx-auto flex max-w-6xl flex-col px-5 py-2">
               {navItems.map((item) => {
                 const isActive = activeSection === item.id
                 return (
@@ -81,8 +88,8 @@ const Navbar = () => {
                     key={item.id}
                     type="button"
                     onClick={() => handleNavClick(item.id)}
-                    className={`py-3 text-left font-['Inter'] text-[14px] transition-colors duration-200 ${
-                      isActive ? 'text-[#00D4FF]' : 'text-[#6B7280] hover:text-[#F0F0F5]'
+                    className={`rounded-lg px-3 py-3 text-left font-sans text-[14px] font-medium transition-colors ${
+                      isActive ? 'bg-white/[0.06] text-heading' : 'text-muted hover:bg-white/[0.04] hover:text-heading'
                     }`}
                     aria-current={isActive ? 'page' : undefined}
                   >

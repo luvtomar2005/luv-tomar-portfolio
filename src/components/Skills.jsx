@@ -1,70 +1,78 @@
 import { motion } from 'framer-motion'
 
+const viewport = { once: true, margin: '-80px' }
+const ease = [0.25, 0.1, 0.25, 1]
+
+function SkillChip({ children, emphasis = false }) {
+  return (
+    <span
+      className={`rounded-md px-2.5 py-1 font-sans text-[13px] font-medium transition-colors duration-200 ${
+        emphasis
+          ? 'bg-accent/10 text-heading ring-1 ring-accent/20 hover:bg-accent/[0.14]'
+          : 'bg-white/[0.04] text-body ring-1 ring-transparent hover:bg-white/[0.07] hover:text-heading'
+      }`}
+    >
+      {children}
+    </span>
+  )
+}
+
 const Skills = () => {
   return (
-    <section id="skills" className="scroll-mt-20 px-5 py-[120px] sm:px-8">
+    <section id="skills" className="scroll-mt-20 border-t border-border px-5 py-24 sm:px-8 sm:py-32">
       <div className="mx-auto w-full max-w-6xl">
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
+          viewport={viewport}
+          transition={{ duration: 0.45, ease }}
         >
-          <h2 className="font-['Space_Grotesk'] text-[30px] font-bold text-[#F0F0F5] sm:text-[36px]">Technical Skills</h2>
+          <p className="font-sans text-[11px] font-semibold uppercase tracking-[0.22em] text-accent">Skills</p>
+          <h2 className="mt-5 font-display text-[clamp(1.75rem,4vw,2.25rem)] font-semibold leading-tight tracking-tight text-heading">
+            Technical stack
+          </h2>
+          <p className="mt-4 max-w-2xl font-sans text-[16px] leading-relaxed text-body">
+            Depth in backend APIs and realtime systems; pragmatic UI for product delivery.
+          </p>
         </motion.div>
 
         <motion.div
-          className="mt-10 space-y-10"
-          initial={{ opacity: 0, y: 40 }}
+          className="mt-14 space-y-12"
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6, ease: 'easeOut', staggerChildren: 0.1 }}
+          viewport={viewport}
+          transition={{ duration: 0.45, ease }}
         >
-          <div className="rounded-[12px] border border-[rgba(0,212,255,0.2)] bg-[rgba(0,212,255,0.04)] p-6 shadow-[0_0_20px_rgba(0,212,255,0.08)] backdrop-blur-[6px]">
-            <p className="font-['Inter'] text-[11px] uppercase tracking-[0.24em] text-[#00D4FF]">Backend (Core Strength)</p>
-            <div className="mt-4 flex flex-wrap gap-2.5">
-              {['Node.js', 'Express.js', 'MongoDB', 'Socket.io', 'REST API Design', 'JWT Auth'].map((skill) => (
-                <motion.span
-                  key={skill}
-                  whileHover={{ y: -1 }}
-                  className="rounded-full border border-[rgba(0,212,255,0.24)] bg-[rgba(10,10,15,0.5)] px-3.5 py-1.5 font-['Space_Grotesk'] text-[16px] text-[#F0F0F5] transition-colors duration-200 hover:border-[rgba(0,212,255,0.45)]"
-                >
+          <div>
+            <p className="font-sans text-[11px] font-semibold uppercase tracking-[0.22em] text-muted">Backend (core)</p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {['Node.js', 'Express.js', 'MongoDB', 'Socket.io', 'REST API design', 'JWT auth'].map((skill) => (
+                <SkillChip key={skill} emphasis>
                   {skill}
-                </motion.span>
+                </SkillChip>
               ))}
             </div>
           </div>
+
           <div>
-            <p className="font-['Inter'] text-[11px] uppercase tracking-[0.24em] text-[#4B5563]">Frontend (Working Knowledge)</p>
-            <div className="mt-3 flex flex-wrap gap-2">
+            <p className="font-sans text-[11px] font-semibold uppercase tracking-[0.22em] text-muted">Frontend</p>
+            <div className="mt-4 flex flex-wrap gap-2">
               {['React', 'Vite', 'Tailwind CSS'].map((skill) => (
-                <motion.span
-                  key={skill}
-                  whileHover={{ y: -1 }}
-                  className="rounded-full border border-[rgba(255,255,255,0.1)] px-3 py-1.5 font-['Inter'] text-[14px] text-[#6B7280] transition-colors duration-200 hover:border-[rgba(255,255,255,0.2)] hover:text-[#F0F0F5]"
-                >
-                  {skill}
-                </motion.span>
+                <SkillChip key={skill}>{skill}</SkillChip>
               ))}
             </div>
           </div>
+
           <div>
-            <p className="font-['Inter'] text-[11px] uppercase tracking-[0.24em] text-[#4B5563]">Infrastructure &amp; Tools</p>
-            <div className="mt-3 flex flex-wrap gap-2">
+            <p className="font-sans text-[11px] font-semibold uppercase tracking-[0.22em] text-muted">Infrastructure &amp; tools</p>
+            <div className="mt-4 flex flex-wrap gap-2">
               {['AWS EC2', 'AWS S3', 'Git', 'GitHub', 'npm'].map((skill) => (
-                <motion.span
-                  key={skill}
-                  whileHover={{ y: -1 }}
-                  className="rounded-full border border-[rgba(255,255,255,0.1)] px-3 py-1.5 font-['Inter'] text-[14px] text-[#6B7280] transition-colors duration-200 hover:border-[rgba(255,255,255,0.2)] hover:text-[#F0F0F5]"
-                >
-                  {skill}
-                </motion.span>
+                <SkillChip key={skill}>{skill}</SkillChip>
               ))}
             </div>
           </div>
-          <div className="pt-2">
-            <p className="font-['Inter'] text-[12px] text-[#4B5563]">250+ DSA problems solved</p>
-          </div>
+
+          <p className="font-sans text-[14px] text-muted">250+ DSA problems solved — reinforcing patterns used in interviews and production debugging.</p>
         </motion.div>
       </div>
     </section>
