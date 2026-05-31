@@ -1,95 +1,90 @@
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
+import { FiArrowRight, FiFileText } from 'react-icons/fi'
+import resumePdf from '../utils/Luv_Tomar_resume.pdf'
 
-const fadeUp = { initial: { opacity: 0, y: 12 }, animate: { opacity: 1, y: 0 } }
+const ease = [0.25, 0.1, 0.25, 1]
 
 const Hero = () => {
+  const prefersReducedMotion = useReducedMotion()
+
+  const fade = (delay = 0) =>
+    prefersReducedMotion
+      ? {}
+      : {
+          initial: { opacity: 0, y: 10 },
+          animate: { opacity: 1, y: 0 },
+          transition: { duration: 0.4, ease, delay },
+        }
+
   return (
-    <section
-      id="home"
-      className="relative flex min-h-screen scroll-mt-20 items-center px-5 pt-[4.5rem] pb-28 sm:px-8 sm:pb-32"
-    >
-      <div className="mx-auto w-full max-w-3xl">
-        <motion.p
-          {...fadeUp}
-          transition={{ duration: 0.45, ease: [0.25, 0.1, 0.25, 1] }}
-          className="mb-8 font-sans text-[13px] font-medium tracking-wide text-accent"
-        >
-          Available for internship · Backend engineering
+    <section id="home" className="relative scroll-mt-20 px-5 pt-[4.25rem] pb-16 sm:px-8 sm:pb-20">
+      <div className="mx-auto w-full max-w-4xl">
+        <motion.p {...fade()} className="mb-4 font-sans text-[12px] font-semibold uppercase tracking-[0.18em] text-accent">
+          Backend-focused full stack · Open to internships
         </motion.p>
 
         <motion.h1
-          {...fadeUp}
-          transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1], delay: 0.04 }}
-          className="font-display text-[clamp(2.5rem,7vw,4.25rem)] font-semibold leading-[1.05] tracking-tight text-heading"
+          {...fade(0.03)}
+          className="font-display text-[clamp(2.25rem,6.5vw,3.75rem)] font-semibold leading-[1.08] tracking-tight text-heading"
         >
           Luv Tomar
         </motion.h1>
 
-        <motion.p
-          {...fadeUp}
-          transition={{ duration: 0.45, ease: [0.25, 0.1, 0.25, 1], delay: 0.08 }}
-          className="mt-5 font-display text-xl font-medium text-body sm:text-2xl"
-        >
-          Backend engineer
+        <motion.p {...fade(0.06)} className="mt-3 font-display text-lg font-medium text-body sm:text-xl">
+          I build APIs, caching layers, and real-time systems for production load.
         </motion.p>
 
-        <motion.div
-          {...fadeUp}
-          transition={{ duration: 0.45, ease: [0.25, 0.1, 0.25, 1], delay: 0.12 }}
-          className="mt-8 max-w-xl space-y-4 font-sans text-[17px] leading-relaxed text-body sm:text-[18px]"
-        >
-          <p>Turning complex backend problems into efficient, reliable systems.</p>
-          <p className="text-[15px] leading-relaxed text-muted sm:text-base">
-            Node.js, Socket.io, REST APIs, AWS, and MongoDB — focused on scalable backends and real-time architecture.
+        <motion.div {...fade(0.09)} className="mt-5 max-w-2xl space-y-3 font-sans text-[15px] leading-relaxed text-body sm:text-[16px]">
+          <p>
+            Backend engineer with full stack delivery — Redis-backed services, REST architecture, JWT auth, Socket.IO
+            realtime, and AWS deployments. Architecture before implementation.
           </p>
+          <p className="text-[14px] text-muted">Node.js · Express · Redis · MongoDB · TypeScript · Socket.IO · AWS EC2</p>
         </motion.div>
 
-        <motion.div
-          {...fadeUp}
-          transition={{ duration: 0.45, ease: [0.25, 0.1, 0.25, 1], delay: 0.16 }}
-          className="mt-10 flex flex-wrap items-center gap-3 sm:gap-4"
-        >
+        <motion.div {...fade(0.12)} className="mt-7 flex flex-wrap items-center gap-2.5 sm:gap-3">
           <a
             href="#projects"
-            className="inline-flex items-center justify-center rounded-lg bg-accent px-6 py-2.5 font-sans text-[14px] font-medium text-page transition-[filter,transform] duration-200 hover:brightness-110 active:scale-[0.98]"
+            className="inline-flex items-center gap-2 rounded-lg bg-accent px-5 py-2.5 font-sans text-[14px] font-medium text-page transition-[filter,transform] duration-200 hover:brightness-110 active:scale-[0.98]"
           >
-            View projects
+            View system projects
+            <FiArrowRight size={16} aria-hidden />
           </a>
           <a
-            href="/resume.pdf"
+            href={resumePdf}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center justify-center rounded-lg border border-border bg-transparent px-6 py-2.5 font-sans text-[14px] font-medium text-heading transition-colors duration-200 hover:border-accent/40 hover:text-accent"
+            download="Luv_Tomar_Resume.pdf"
+            className="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-2.5 font-sans text-[14px] font-medium text-heading transition-colors duration-200 hover:border-accent/40 hover:text-accent"
           >
-            Resume (PDF)
+            <FiFileText size={16} aria-hidden />
+            Resume
+          </a>
+          <a
+            href="https://github.com/luvtomar2005"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 rounded-lg border border-border/70 px-5 py-2.5 font-sans text-[14px] font-medium text-muted transition-colors duration-200 hover:border-border hover:text-heading"
+          >
+            GitHub
           </a>
         </motion.div>
 
-        <motion.p
-          {...fadeUp}
-          transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1], delay: 0.2 }}
-          className="mt-10 max-w-lg font-sans text-[14px] text-muted"
-        >
-          250+ DSA problems — patterns over memorization. Building production-minded APIs and WebSocket layers.
-        </motion.p>
-
         <motion.dl
-          {...fadeUp}
-          transition={{ duration: 0.45, ease: [0.25, 0.1, 0.25, 1], delay: 0.22 }}
-          className="mt-16 grid gap-8 border-t border-border pt-10 sm:grid-cols-3 sm:gap-6"
+          {...fade(0.14)}
+          className="mt-10 grid gap-5 border-t border-border pt-8 sm:grid-cols-2 lg:grid-cols-4 sm:gap-4"
         >
-          <div>
-            <dt className="font-sans text-[12px] font-medium uppercase tracking-wider text-muted">Deployment</dt>
-            <dd className="mt-1.5 font-sans text-[14px] text-heading">1 production app on AWS EC2</dd>
-          </div>
-          <div>
-            <dt className="font-sans text-[12px] font-medium uppercase tracking-wider text-muted">Real-time</dt>
-            <dd className="mt-1.5 font-sans text-[14px] text-heading">Socket.io architecture</dd>
-          </div>
-          <div>
-            <dt className="font-sans text-[12px] font-medium uppercase tracking-wider text-muted">Security</dt>
-            <dd className="mt-1.5 font-sans text-[14px] text-heading">JWT auth systems</dd>
-          </div>
+          {[
+            ['Caching', 'Redis-backed redirect & lookup paths'],
+            ['Analytics', 'Async click tracking pipelines'],
+            ['Realtime', 'Socket.IO chat architecture'],
+            ['Production', 'JWT auth · AWS EC2 deploys'],
+          ].map(([label, value]) => (
+            <div key={label}>
+              <dt className="font-sans text-[11px] font-semibold uppercase tracking-wider text-muted">{label}</dt>
+              <dd className="mt-1 font-sans text-[13px] leading-snug text-heading">{value}</dd>
+            </div>
+          ))}
         </motion.dl>
       </div>
     </section>

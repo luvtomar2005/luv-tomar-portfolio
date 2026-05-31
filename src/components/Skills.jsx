@@ -1,7 +1,4 @@
-import { motion } from 'framer-motion'
-
-const viewport = { once: true, margin: '-80px' }
-const ease = [0.25, 0.1, 0.25, 1]
+import { motion, useReducedMotion } from 'framer-motion'
 
 function SkillChip({ children, emphasis = false }) {
   return (
@@ -18,35 +15,44 @@ function SkillChip({ children, emphasis = false }) {
 }
 
 const Skills = () => {
+  const prefersReducedMotion = useReducedMotion()
+  const reveal = prefersReducedMotion
+    ? {}
+    : {
+        initial: { opacity: 0, y: 12 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true, margin: '-60px' },
+        transition: { duration: 0.4, ease: [0.25, 0.1, 0.25, 1] },
+      }
+
   return (
-    <section id="skills" className="scroll-mt-20 border-t border-border px-5 py-24 sm:px-8 sm:py-32">
+    <section id="skills" className="scroll-mt-20 border-t border-border px-5 py-16 sm:px-8 sm:py-20">
       <div className="mx-auto w-full max-w-6xl">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={viewport}
-          transition={{ duration: 0.45, ease }}
-        >
+        <motion.div {...reveal}>
           <p className="font-sans text-[11px] font-semibold uppercase tracking-[0.22em] text-accent">Skills</p>
-          <h2 className="mt-5 font-display text-[clamp(1.75rem,4vw,2.25rem)] font-semibold leading-tight tracking-tight text-heading">
-            Technical stack
+          <h2 className="mt-3 font-display text-[clamp(1.6rem,3.5vw,2rem)] font-semibold leading-tight tracking-tight text-heading">
+            Stack aligned with production backend work
           </h2>
-          <p className="mt-4 max-w-2xl font-sans text-[16px] leading-relaxed text-body">
-            Depth in backend APIs and realtime systems; pragmatic UI for product delivery.
+          <p className="mt-3 max-w-2xl font-sans text-[15px] leading-relaxed text-body">
+            Depth in APIs, caching, auth, and realtime — with TypeScript/React for full-stack delivery.
           </p>
         </motion.div>
 
-        <motion.div
-          className="mt-14 space-y-12"
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={viewport}
-          transition={{ duration: 0.45, ease }}
-        >
+        <motion.div {...reveal} transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1], delay: 0.04 }} className="mt-10 space-y-8">
           <div>
-            <p className="font-sans text-[11px] font-semibold uppercase tracking-[0.22em] text-muted">Backend (core)</p>
-            <div className="mt-4 flex flex-wrap gap-2">
-              {['Node.js', 'Express.js', 'MongoDB', 'Socket.io', 'REST API design', 'JWT auth'].map((skill) => (
+            <p className="font-sans text-[11px] font-semibold uppercase tracking-[0.22em] text-muted">Backend &amp; systems</p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {[
+                'Node.js',
+                'Express.js',
+                'Redis',
+                'MongoDB',
+                'Socket.IO',
+                'REST API design',
+                'JWT auth',
+                'Rate limiting',
+                'Pagination',
+              ].map((skill) => (
                 <SkillChip key={skill} emphasis>
                   {skill}
                 </SkillChip>
@@ -55,24 +61,26 @@ const Skills = () => {
           </div>
 
           <div>
-            <p className="font-sans text-[11px] font-semibold uppercase tracking-[0.22em] text-muted">Frontend</p>
-            <div className="mt-4 flex flex-wrap gap-2">
-              {['React', 'Vite', 'Tailwind CSS'].map((skill) => (
+            <p className="font-sans text-[11px] font-semibold uppercase tracking-[0.22em] text-muted">Frontend &amp; languages</p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {['TypeScript', 'React', 'Vite', 'Tailwind CSS'].map((skill) => (
                 <SkillChip key={skill}>{skill}</SkillChip>
               ))}
             </div>
           </div>
 
           <div>
-            <p className="font-sans text-[11px] font-semibold uppercase tracking-[0.22em] text-muted">Infrastructure &amp; tools</p>
-            <div className="mt-4 flex flex-wrap gap-2">
-              {['AWS EC2', 'AWS S3', 'Git', 'GitHub', 'npm'].map((skill) => (
+            <p className="font-sans text-[11px] font-semibold uppercase tracking-[0.22em] text-muted">Infrastructure</p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {['AWS EC2', 'AWS S3', 'Git', 'GitHub', 'Docker (basics)'].map((skill) => (
                 <SkillChip key={skill}>{skill}</SkillChip>
               ))}
             </div>
           </div>
 
-          <p className="font-sans text-[14px] text-muted">250+ DSA problems solved — reinforcing patterns used in interviews and production debugging.</p>
+          <p className="font-sans text-[13px] text-muted">
+            250+ DSA problems — graph, tree, and sliding-window patterns applied to debugging and system tradeoffs.
+          </p>
         </motion.div>
       </div>
     </section>

@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { FiMenu, FiX } from 'react-icons/fi'
 import { useState } from 'react'
 import useActiveSection from '../hooks/useActiveSection'
+import resumePdf from '../utils/Luv_Tomar_resume.pdf'
 
 const navItems = [
   { id: 'about', label: 'About' },
@@ -58,6 +59,14 @@ const Navbar = () => {
               </button>
             )
           })}
+          <a
+            href={resumePdf}
+            target="_blank"
+            rel="noreferrer"
+            className="ml-2 rounded-lg border border-border px-3 py-1.5 font-sans text-[12px] font-medium text-heading transition-colors hover:border-accent/40 hover:text-accent"
+          >
+            Resume
+          </a>
         </div>
 
         <button
@@ -97,6 +106,14 @@ const Navbar = () => {
                   </button>
                 )
               })}
+              <a
+                href={resumePdf}
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-lg px-3 py-3 font-sans text-[14px] font-medium text-muted transition-colors hover:bg-white/[0.04] hover:text-heading"
+              >
+                Resume
+              </a>
             </div>
           </motion.div>
         )}
